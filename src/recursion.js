@@ -42,7 +42,7 @@ let sumBelow = function (n) {
 // 6. Get the integers within a range (x, y).
 // range(2,9); // [3,4,5,6,7,8]
 let range = function (x, y) {
-    return (x+1 < y) ? [++x].concat(range(x, y)) : (--x > y) ? [x].concat(range(x, y)) : [];
+    return (x + 1 < y) ? [++x].concat(range(x, y)) : (--x > y) ? [x].concat(range(x, y)) : [];
 };
 
 // 7. Compute the exponent of a number.
@@ -50,7 +50,23 @@ let range = function (x, y) {
 // 8^2 = 8 x 8 = 64. Here, 8 is the base and 2 is the exponent.
 // exponent(4,3); // 64
 // https://www.khanacademy.org/computing/computer-science/algorithms/recursive-algorithms/a/computing-powers-of-a-number
-var exponent = function (base, exp) {
+let exponent = function (base, exp) {
+    const I = 100000;
+    if (exp > 1) {
+        const exp2 = parseInt((exp / 2).toString());
+        const x = exponent(base, exp2);
+        if (exp % 2) return x * x * base;
+        else return x * x;
+    }
+    if (exp === 1) return base;
+    if (!exp || !base) return 1;
+    if (exp === -1) return parseInt((1 / base * I).toString()) / I;
+    if (exp < 1) {
+        const exp2 = parseInt((exp / 2).toString());
+        const x = exponent(parseInt((1 / base * I).toString()) / I, exp2);
+        if (exp % 2) return parseInt((1 / (x * x * base) * I).toString()) / I;
+        else return parseInt((1 / (x * x) * I).toString()) / I;
+    }
 };
 
 // 8. Determine if a number is a power of two.
