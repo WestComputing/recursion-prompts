@@ -124,7 +124,11 @@ var gcd = function (x, y) {
 // both are identical.
 // compareStr('house', 'houses') // false
 // compareStr('tomato', 'tomato') // true
-var compareStr = function (str1, str2) {
+let compareStr = function (str1, str2) {
+    // if (str1.length !== str2.length) return false; // short-circuit fails recursion test
+    if (!str1.length && !str2.length) return true;
+    if (str1[0] !== str2[0]) return false;
+    return compareStr(str1.slice(1), str2.slice(1));
 };
 
 // 16. Write a function that accepts a string and creates an array where each letter
