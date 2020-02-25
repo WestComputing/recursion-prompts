@@ -84,7 +84,14 @@ let reverse = function (string) {
 };
 
 // 10. Write a function that determines if a string is a palindrome.
-var palindrome = function (string) {
+let palindrome = function (string) {
+    string = string.trim().toLowerCase();
+    const length = string.length;
+    if (length > 1) {
+        if (string[0] !== string[length - 1]) return false;
+        return palindrome(string.slice(1, -1));
+    }
+    return true;
 };
 
 // 11. Write a function that returns the remainder of x divided by y without using the
