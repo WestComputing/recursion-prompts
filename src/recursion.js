@@ -108,16 +108,14 @@ let multiply = function (x, y) {
     if (!x || !y) return 0;
     if (x === 1) return y;
     if (y === 1) return x;
+    let isNegative = false;
     if (x < 0 && y < 0) {
         x = -x;
         y = -y;
-    }
-    let isNegative = false;
-    if (x < 0 && y > 0) {
+    } else if (x < 0 && y > 0) {
         isNegative = true;
         x = -x;
-    }
-    if (x > 0 && y < 0) {
+    } else if (x > 0 && y < 0) {
         isNegative = true;
         y = -y;
     }
@@ -126,7 +124,23 @@ let multiply = function (x, y) {
 
 // 13. Write a function that divides two numbers without using the / operator or
 // Math methods to arrive at an approximate quotient (ignore decimal endings).
-var divide = function (x, y) {
+let divide = function (x, y) {
+    if (y === 0) return NaN;
+    if (y === 1) return x;
+    if (y === -1) return -x;
+    let isNegative = false;
+    if (x <= 0 && y < 0) {
+        x = -x;
+        y = -y;
+    } else if (x <= 0 && y > 0) {
+        isNegative = true;
+        x = -x;
+    } else if (x >= 0 && y < 0) {
+        isNegative = true;
+        y = -y;
+    }
+    if (x < y) return 0;
+    return isNegative ? -1 + divide(x - y, -y) : 1 + divide(x - y, y);
 };
 
 // 14. Find the greatest common divisor (gcd) of two positive numbers. The GCD of two
