@@ -298,7 +298,13 @@ let capitalizeFirst = function (array) {
 //   e: {e: {e: 2}, ee: 'car'}
 // };
 // nestedEvenSum(obj1); // 10
-var nestedEvenSum = function (obj) {
+let nestedEvenSum = function (obj) {
+    let sum = 0;
+    for (const key in obj) {
+        if (typeof obj[key] === 'number' && !(obj[key] % 2)) sum += obj[key];
+        if (typeof obj[key] === 'object' && !Array.isArray(obj[key])) sum += nestedEvenSum(obj[key]);
+    }
+    return sum;
 };
 
 // 30. Flatten an array containing nested arrays.
