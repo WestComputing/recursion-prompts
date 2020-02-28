@@ -316,7 +316,10 @@ let augmentElements = function (array, aug) {
 // 34. Reduce a series of zeroes to a single 0.
 // minimizeZeroes([2,0,0,0,1,4]) // [2,0,1,4]
 // minimizeZeroes([2,0,0,0,1,0,0,4]) // [2,0,1,0,4]
-var minimizeZeroes = function (array) {
+let minimizeZeroes = function (array) {
+    if (array.length === 1) return array;
+    const result = array[0] === 0 && array[0] === array[1] ? [] : [array[0]];
+    return result.concat(minimizeZeroes(array.slice(1)));
 };
 
 // 35. Alternate the numbers in an array between positive and negative regardless of
