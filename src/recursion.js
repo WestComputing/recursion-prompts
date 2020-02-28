@@ -199,7 +199,10 @@ let fizzBuzz = function (n) {
 // 20. Count the occurence of a value in a list.
 // countOccurrence([2,7,4,4,1,4], 4) // 3
 // countOccurrence([2,'banana',4,4,1,'banana'], 'banana') // 2
-var countOccurrence = function (array, value) {
+let countOccurrence = function (array, value) {
+    const result = (array[0] === value) ? 1 : 0;
+    if (array.length === 1) return result;
+    return result + countOccurrence(array.slice(1), value);
 };
 
 // 21. Write a recursive version of map.
