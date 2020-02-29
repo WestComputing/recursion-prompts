@@ -162,7 +162,11 @@ let divide = function (x, y) {
 // gcd(4,36); // 4
 // http://www.cse.wustl.edu/~kjg/cse131/Notes/Recursion/recursion.html
 // https://www.khanacademy.org/computing/computer-science/cryptography/modarithmetic/a/the-euclidean-algorithm
-var gcd = function (x, y) {
+let gcd = function (x, y) {
+    if (x < 0 || y < 0) return null;
+    if (!x) return y;
+    if (!y) return x;
+    return gcd(y, x % y);
 };
 
 // 15. Write a function that compares each character of two strings and returns true if
