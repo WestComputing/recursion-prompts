@@ -6,27 +6,19 @@
 // denoted by n!, is the product of all positive integers less than or equal to n.
 // Example: 5! = 5 x 4 x 3 x 2 x 1 = 120
 // factorial(5); // 120
-let factorial = function (n) {
-    return n < 0 ? null : n < 2 ? 1 : n * factorial(n - 1);
-};
+let factorial = n => n < 0 ? null : n < 2 ? 1 : n * factorial(n - 1);
 
 // 2. Compute the sum of an array of integers.
 // sum([1,2,3,4,5,6]); // 21
-let sum = function (array) {
-    return array.length ? array[0] + sum(array.slice(1)) : 0;
-};
+let sum = array => array.length ? array[0] + sum(array.slice(1)) : 0;
 
 // 3. Sum all numbers in an array containing nested arrays.
 // arraySum([1,[2,3],[[4]],5]); // 15
-let arraySum = function (array) {
-    return Array.isArray(array[0]) ? arraySum(array[0]) + arraySum(array.slice(1)) :
-        array.length ? array[0] + arraySum(array.slice(1)) : 0;
-};
+let arraySum = array => Array.isArray(array[0]) ? arraySum(array[0]) + arraySum(array.slice(1)) :
+    array.length ? array[0] + arraySum(array.slice(1)) : 0;
 
 // 4. Check if a number is even.
-let isEven = function (n) {
-    return Math.abs(n) > 1 ? isEven(Math.abs(n) - 2) : (n === 0);
-};
+let isEven = n => Math.abs(n) > 1 ? isEven(Math.abs(n) - 2) : (n === 0);
 
 // 5. Sum all integers below a given integer.
 // sumBelow(10); // 45
@@ -34,16 +26,14 @@ let isEven = function (n) {
 let sumBelow = function (n) {
     let m = Math.abs(n) - 1;
     if (m < 1) return 0;
-    let isNegative = n < 0;
+    const isNegative = n < 0;
     let sum = m + sumBelow(m);
     return isNegative ? -sum : sum;
 };
 
 // 6. Get the integers within a range (x, y).
 // range(2,9); // [3,4,5,6,7,8]
-let range = function (x, y) {
-    return (x + 1 < y) ? [++x].concat(range(x, y)) : (--x > y) ? [x].concat(range(x, y)) : [];
-};
+let range = (x, y) => (x + 1 < y) ? [++x].concat(range(x, y)) : (--x > y) ? [x].concat(range(x, y)) : [];
 
 // 7. Compute the exponent of a number.
 // The exponent of a number says how many times the base number is used as a factor.
@@ -80,19 +70,13 @@ let powerOfTwo = function (n) {
 };
 
 // 9. Write a function that reverses a string.
-let reverse = function (string) {
-    const len = string.length;
-    if (len < 2) return string;
-    return string.slice(-1) + reverse(string.slice(0, len - 1));
-};
+let reverse = s => (s.length < 2) ? s : s.slice(-1) + reverse(s.slice(0, s.length - 1));
 
 // 10. Write a function that determines if a string is a palindrome.
 let palindrome = function (string) {
     string = string.trim().toLowerCase();
-    const length = string.length;
-    if (length > 1) {
-        if (string[0] !== string[length - 1]) return false;
-        return palindrome(string.slice(1, -1));
+    if (string.length > 1) {
+        return (string[0] !== string[string.length - 1]) ? false : palindrome(string.slice(1, -1));
     }
     return true;
 };
@@ -182,24 +166,15 @@ let compareStr = function (str1, str2) {
 
 // 16. Write a function that accepts a string and creates an array where each letter
 // occupies an index of the array.
-let createArray = function (str) {
-    if (str.length === 1) return [str];
-    return [str[0]].concat(createArray(str.slice(1)));
-};
+let createArray = s => (s.length === 1) ? [s] : [s[0]].concat(createArray(s.slice(1)));
 
 // 17. Reverse the order of an array
-let reverseArr = function (array) {
-    if (array.length === 1) return array;
-    return [array.pop()].concat(reverseArr(array));
-};
+let reverseArr = array => (array.length === 1) ? array : [array.pop()].concat(reverseArr(array));
 
 // 18. Create a new array with a given value and length.
 // buildList(0,5) // [0,0,0,0,0]
 // buildList(7,3) // [7,7,7]
-let buildList = function (value, length) {
-    if (length === 1) return [value];
-    return [value].concat(buildList(value, --length));
-};
+let buildList = (value, length) => (length === 1) ? [value] : [value].concat(buildList(value, --length));
 
 // 19. Implement FizzBuzz. Given integer n, return an array of the string representations of 1 to n.
 // For multiples of three, output 'Fizz' instead of the number.
@@ -214,21 +189,18 @@ let fizzBuzz = function (n) {
     return fizzBuzz(--n).concat([s]);
 };
 
-// 20. Count the occurence of a value in a list.
+// 20. Count the occurrence of a value in a list.
 // countOccurrence([2,7,4,4,1,4], 4) // 3
 // countOccurrence([2,'banana',4,4,1,'banana'], 'banana') // 2
 let countOccurrence = function (array, value) {
     const result = (array[0] === value) ? 1 : 0;
-    if (array.length === 1) return result;
-    return result + countOccurrence(array.slice(1), value);
+    return (array.length === 1) ? result : result + countOccurrence(array.slice(1), value);
 };
 
 // 21. Write a recursive version of map.
 // rMap([1,2,3], timesTwo); // [2,4,6]
-let rMap = function (array, callback) {
-    if (array.length === 1) return callback(array[0]);
-    return [callback(array[0])].concat(rMap(array.slice(1), callback));
-};
+let rMap = (array, callback) => (array.length === 1) ? callback(array[0]) :
+    [callback(array[0])].concat(rMap(array.slice(1), callback));
 
 // 22. Write a function that counts the number of times a key occurs in an object.
 // var obj = {'e':{'x':'y'},'t':{'r':{'e':'r'},'p':{'y':'r'}},'y':'e'};
@@ -261,8 +233,8 @@ let replaceKeysInObj = function (obj, oldKey, newKey) {
         obj[newKey] = obj[oldKey];
         delete obj[oldKey];
     }
-    for (const prop in obj)
-        if (typeof obj[prop] === 'object' && !Array.isArray(obj[prop])) replaceKeysInObj(obj[prop], oldKey, newKey);
+    for (const key in obj)
+        if (typeof obj[key] === 'object' && !Array.isArray(obj[key])) replaceKeysInObj(obj[key], oldKey, newKey);
     return obj;
 };
 
@@ -284,11 +256,7 @@ let fibonacci = function (n) {
 // nthFibo(5); // 5
 // nthFibo(7); // 13
 // nthFibo(3); // 2
-let nthFibo = function (n) {
-    if (n < 0) return null;
-    if (n < 2) return n;
-    return nthFibo(n - 2) + nthFibo(n - 1);
-};
+let nthFibo = n => (n < 0) ? null : (n < 2) ? n : nthFibo(n - 2) + nthFibo(n - 1);
 
 // 27. Given an array of words, return a new array containing each word capitalized.
 // var words = ['i', 'am', 'learning', 'recursion'];
@@ -304,7 +272,7 @@ let capitalizeWords = function (array) {
 let capitalizeFirst = function (array) {
     String.prototype.toFirstUpperCase = function () {
         return this[0].toUpperCase().concat(this.slice(1));
-    }
+    };
     if (array.every(e => e === e.toFirstUpperCase())) return array;
     array.push(array.shift().toFirstUpperCase());
     return capitalizeFirst(array);
@@ -363,18 +331,16 @@ let compress = function (list) {
 // itself.
 // augmentElements([[],[3],[7]], 5); // [[5],[3,5],[7,5]]
 let augmentElements = function (array, aug) {
-    const augmented = [...array[0], aug];
-    if (array.length === 1) return [augmented];
-    return [augmented, ...augmentElements(array.slice(1), aug)];
+    const result = [...array[0], aug];
+    return (array.length === 1) ? [result] : [result, ...augmentElements(array.slice(1), aug)];
 };
 
 // 34. Reduce a series of zeroes to a single 0.
 // minimizeZeroes([2,0,0,0,1,4]) // [2,0,1,4]
 // minimizeZeroes([2,0,0,0,1,0,0,4]) // [2,0,1,0,4]
 let minimizeZeroes = function (array) {
-    if (array.length === 1) return array;
     const result = array[0] === 0 && array[0] === array[1] ? [] : [array[0]];
-    return result.concat(minimizeZeroes(array.slice(1)));
+    return (array.length === 1) ? array : result.concat(minimizeZeroes(array.slice(1)));
 };
 
 // 35. Alternate the numbers in an array between positive and negative regardless of
@@ -395,11 +361,10 @@ let alternateSign = function (array) {
 let numToText = function (str) {
     const dict = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
     const arr = str.split(' ');
-    let word = arr.shift();
-    let num = parseInt(word);
-    let result = isNaN(num) ? word : dict[num];
-    if (!arr.length) return result;
-    return result + ' ' + numToText(arr.join(' '));
+    const word = arr.shift();
+    const num = parseInt(word);
+    const result = Number.isNaN(num) ? word : dict[num];
+    return (!arr.length) ? result : result + ' ' + numToText(arr.join(' '));
 };
 
 
@@ -410,7 +375,6 @@ let tagCount = function (tag, node = document) {
     let numTags = 0;
     if (node.nodeType === Node.ELEMENT_NODE && node.tagName.toUpperCase() === tag.toUpperCase()) numTags++;
     if (node.hasChildNodes()) node.childNodes.forEach(n => numTags += tagCount(tag, n));
-    // if (node.nextSibling) numTags += tagCount(tag, node.nextSibling);
     return numTags;
 };
 
@@ -419,13 +383,11 @@ let tagCount = function (tag, node = document) {
 // binarySearch(array, 5) // 5
 // https://www.khanacademy.org/computing/computer-science/algorithms/binary-search/a/binary-search
 let binarySearch = function (array, target) {
-    const len = array.length;
-    if (!len) return null;
-    const middle = Math.floor(len / 2);
+    if (!array.length) return null;
+    const middle = Math.trunc(array.length / 2);
     if (target === array[middle]) return middle;
     if (target < array[middle]) return binarySearch(array.slice(0, middle), target);
-    const rightHalf = array.slice(middle + 1);
-    const searchRight = binarySearch(rightHalf, target);
+    const searchRight = binarySearch(array.slice(middle + 1), target);
     return searchRight === null ? null : searchRight + middle + 1;
 };
 
@@ -438,21 +400,17 @@ let mergeSort = function (array) {
 
     const mergeArrays = (left, right) => {
         const mergedArray = Array(left.length + right.length);
-        let leftIndex = 0;
-        let rightIndex = 0;
-        for (let mergedIndex = 0; mergedIndex < mergedArray.length; mergedIndex++) {
-            if (leftIndex < left.length) {
-                if (left[leftIndex] < right[rightIndex] || rightIndex === right.length) {
-                    mergedArray[mergedIndex] = left[leftIndex++];
-                } else {
-                    mergedArray[mergedIndex] = right[rightIndex++];
-                }
-            } else mergedArray[mergedIndex] = right[rightIndex++];
+        let leftIdx = 0;
+        let rightIdx = 0;
+        for (let mergedIdx = 0; mergedIdx < mergedArray.length; mergedIdx++) {
+            if (leftIdx < left.length && (left[leftIdx] < right[rightIdx] || rightIdx === right.length))
+                mergedArray[mergedIdx] = left[leftIdx++];
+            else mergedArray[mergedIdx] = right[rightIdx++];
         }
         return mergedArray;
     };
 
-    const middle = Math.floor(array.length / 2);
+    const middle = Math.trunc(array.length / 2);
     const leftArray = array.slice(0, middle);
     const rightArray = array.slice(middle);
 
@@ -468,18 +426,14 @@ let mergeSort = function (array) {
 let clone = function (input) {
 
     if (Array.isArray(input)) {
-        const clonedArray = [];
-        for (const element of input) {
-            clonedArray.push(clone(element));
-        }
+        const clonedArray = Array(input.length);
+        input.forEach((e, i) => clonedArray[i] = clone(e));
         return clonedArray;
     }
 
     if (typeof input === 'object') {
         const clonedObject = {};
-        for (const [key, value] of Object.entries(input)) {
-            clonedObject[key] = clone(value);
-        }
+        for (const [key, value] of Object.entries(input)) clonedObject[key] = clone(value);
         return clonedObject;
     }
 
