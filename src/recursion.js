@@ -243,13 +243,26 @@ let replaceKeysInObj = function (obj, oldKey, newKey) {
 // Example: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34.....
 // fibonacci(5); // [0,1,1,2,3,5]
 // Note: The 0 is not counted.
+
+// Second solution (works, but does this really use recursion?):
 let fibonacci = function (n) {
     if (n < 1) return null;
-    if (!Array.isArray(n)) n = [n, 1, 0];
-    n.push(n[n.length - 2] + n[n.length - 1]);
-    if (n.length - 3 < n[0]) return fibonacci(n);
-    return n.slice(2);
+    if (!Array.isArray(n)) n = [0, 1].concat(Array(n - 1));
+    if (n[n.length - 1]) return n;
+    const nextIndex = n.findIndex(e => typeof e === 'undefined');
+    n[nextIndex] = n[nextIndex - 2] + n[nextIndex - 1];
+    return fibonacci(n);
 };
+
+// First solution (works, but is this really meeting the one-argument requirement?):
+//
+// let fibonacci = function (n) {
+//     if (n < 1) return null;
+//     if (!Array.isArray(n)) n = [n, 1, 0];
+//     n.push(n[n.length - 2] + n[n.length - 1]);
+//     if (n.length - 3 < n[0]) return fibonacci(n);
+//     return n.slice(2);
+// };
 
 // 26. Return the Fibonacci number located at index n of the Fibonacci sequence.
 // [0,1,1,2,3,5,8,13,21]
