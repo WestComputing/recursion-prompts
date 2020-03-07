@@ -206,10 +206,24 @@ let rMap = (array, callback) => (array.length === 1) ? callback(array[0]) :
 // var obj = {'e':{'x':'y'},'t':{'r':{'e':'r'},'p':{'y':'r'}},'y':'e'};
 // countKeysInObj(obj, 'r') // 1
 // countKeysInObj(obj, 'e') // 2
+// let countKeysInObj = function (obj, key) {
+//     let count = obj.hasOwnProperty(key) ? 1 : 0;
+//     for (const prop in obj)
+//         if (typeof obj[prop] === 'object' && !Array.isArray(obj[prop])) count += countKeysInObj(obj[prop], key);
+//     return count;
+// };
+
+// Styled
 let countKeysInObj = function (obj, key) {
-    let count = obj.hasOwnProperty(key) ? 1 : 0;
-    for (const prop in obj)
-        if (typeof obj[prop] === 'object' && !Array.isArray(obj[prop])) count += countKeysInObj(obj[prop], key);
+
+    let count = key in obj ? 1 : 0;
+
+    for (const prop in obj) {
+        if (typeof obj[prop] === 'object' && !Array.isArray(obj[prop])) {
+            count += countKeysInObj(obj[prop], key);
+        }
+    }
+    
     return count;
 };
 
