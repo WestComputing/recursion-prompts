@@ -153,12 +153,10 @@ let divide = function (x, y) {
 //     return gcd(y, x % y);
 // };
 
-let gcd = function (x, y) {
-    return (x < 0 || y < 0) ? null
-            : (!x) ? y
-            : (!y) ? x
-            : gcd(y, x % y);
-};
+let gcd = (x, y) => (x < 0 || y < 0) ? null :
+    (!x) ? y :
+    (!y) ? x :
+    gcd(y, x % y);
 
 // 15. Write a function that compares each character of two strings and returns true if
 // both are identical.
